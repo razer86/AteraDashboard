@@ -1,0 +1,88 @@
+body {
+    font-family: sans-serif;
+    padding: 20px;
+    }
+
+    select, button {
+    margin: 10px 0;
+    }
+
+    .section {
+    margin-top: 30px;
+    }
+
+    #customerSearch,
+    .checkbox-list {
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    }
+
+    .checkbox-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    }
+
+    .checkbox-list label {
+    white-space: nowrap;
+    }
+
+    details[open] .details-content {
+    max-height: 1000px; /* enough for all checkboxes */
+    opacity: 1;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+
+    .details-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+
+    /* colours for row flash */
+    @keyframes flashRow {
+    0%   { background-color: #fff9c4; }
+    50%  { background-color: #fff59d; }
+    100% { background-color: transparent; }
+    }
+
+    summary span#customerStats {
+    margin-left: 4px;
+    }
+
+    .panel-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: bold;
+    gap: 12px;
+    }
+
+    .panel-summary .arrow {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 8px;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    transform: rotate(-45deg);
+    transition: transform 0.3s ease;
+    }
+
+    details[open] .panel-summary .arrow {
+    transform: rotate(45deg);
+    }
+
+    .refresh-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: normal;
+    font-size: 0.85em;
+    }
