@@ -19,20 +19,29 @@
                     <option value="60000" selected>1 minute</option>
                     <option value="300000">5 minutes</option>
                   </select>
-                  <span id="refreshCountdown">Refreshing in: --</span>
+                  <!-- <span id="refreshCountdown">Refreshing in: --</span> -->
                 </span>
               </summary>
               
 
         <div class="details-content">
+          <label style="margin-left: 10px;" title="Disabled by default to reduce API load. Enabling this may trigger many Atera API requests.">
+            <input type="checkbox" id="toggleBranchLookup">
+            Enable Branch Lookups
+          </label>
+          
+          
             <div style="margin: 8px 0;">
             <button type="button" onclick="selectAllCustomers()">Select All</button>
             <button type="button" onclick="deselectAllCustomers()">Deselect All</button>
+            <button type="button" onclick="selectFilteredCustomers()">Select Filtered</button>
+
             </div>
 
             <input type="text" id="customerSearch" placeholder="Search customers...">
 
             <div id="customerCheckboxes" class="checkbox-list"></div>
+
         </div>
         </details>
 
@@ -40,11 +49,13 @@
       
     
   <div class="section">
-    <h2>🚨 Alerts</h2>
-    <div id="alerts"></div>
+    <div id="alertsDiv"></div>
   </div>
 
   <script src="app.js"></script>
-
+  
+  <!-- <small id="versionTag"></small> -->
+  <div id="refreshCountdownBox">🔄 Refreshing in: --</div>
+ 
 </body>
 </html>

@@ -1,70 +1,32 @@
+/* =========================================
+   === Base Layout & Typography ===
+========================================= */
 body {
     font-family: sans-serif;
     padding: 20px;
-    }
-
-    select, button {
+  }
+  
+  select, button {
     margin: 10px 0;
-    }
-
-    .section {
+  }
+  
+  /* =========================================
+     === Panels & Section Styling ===
+  ========================================= */
+  .section {
     margin-top: 30px;
-    }
-
-    #customerSearch,
-    .checkbox-list {
-    width: fit-content;
-    max-width: 100%;
-    box-sizing: border-box;
-    }
-
-    .checkbox-list {
-    display: flex;
-    flex-direction: column;
-    max-height: 200px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    }
-
-    .checkbox-list label {
-    white-space: nowrap;
-    }
-
-    details[open] .details-content {
-    max-height: 1000px; /* enough for all checkboxes */
-    opacity: 1;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
-    }
-
-    .details-content {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
-    }
-
-    /* colours for row flash */
-    @keyframes flashRow {
-    0%   { background-color: #fff9c4; }
-    50%  { background-color: #fff59d; }
-    100% { background-color: transparent; }
-    }
-
-    summary span#customerStats {
-    margin-left: 4px;
-    }
-
-    .panel-summary {
+  }
+  
+  .panel-summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
     font-weight: bold;
     gap: 12px;
-    }
-
-    .panel-summary .arrow {
+  }
+  
+  .panel-summary .arrow {
     display: inline-block;
     width: 10px;
     height: 10px;
@@ -73,16 +35,165 @@ body {
     border-bottom: 2px solid black;
     transform: rotate(-45deg);
     transition: transform 0.3s ease;
-    }
-
-    details[open] .panel-summary .arrow {
+  }
+  
+  details[open] .panel-summary .arrow {
     transform: rotate(45deg);
-    }
-
-    .refresh-controls {
+  }
+  
+  /* Collapsible content */
+  .details-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+  }
+  
+  details[open] .details-content {
+    max-height: 1000px;
+    opacity: 1;
+  }
+  
+  /* Customer stats label */
+  summary span#customerStats {
+    margin-left: 4px;
+  }
+  
+  /* =========================================
+     === Customer Selector Area ===
+  ========================================= */
+  #customerSearch,
+  .checkbox-list {
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .checkbox-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .checkbox-list label {
+    white-space: nowrap;
+  }
+  
+  /* =========================================
+     === Refresh Controls ===
+  ========================================= */
+  .refresh-controls {
     display: flex;
     align-items: center;
     gap: 8px;
     font-weight: normal;
     font-size: 0.85em;
+  }
+  
+  #refreshCountdownBox {
+    position: fixed;
+    top: 10px;
+    right: 12px;
+    font-size: 0.85em;
+    color: #333;
+    background: white;
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+    font-family: sans-serif;
+  }
+  
+  /* =========================================
+     === Table Styling ===
+  ========================================= */
+  tbody tr:nth-child(odd) {
+    background-color: var(--row-band-light);
+  }
+  
+  body.dark-mode tbody tr:nth-child(odd) {
+    background-color: var(--row-band-dark);
+  }
+  
+  tbody tr:hover {
+    background-color: #e8f4ff;
+    transition: background-color 0.2s ease;
+  }
+  
+  /* Flash animation for new rows */
+  @keyframes flashRow {
+    0%   { background-color: #fff9c4; }
+    50%  { background-color: #fff59d; }
+    100% { background-color: transparent; }
+  }
+  
+  /* =========================================
+     === Color Theme Variables ===
+  ========================================= */
+  :root {
+    --row-band-light: #fafafa;
+    --row-band-dark: #1c1c1c;
+  
+    --severity-critical: red;
+    --severity-critical-bg: #ffe5e5;
+    --severity-warning: orange;
+    --severity-warning-bg: #fff3cd;
+    --severity-info: #007bff;
+    --severity-info-bg: #e6f0ff;
+    --link-color: #007bff;
+  }
+  
+  body.dark-mode {
+    background-color: #111;
+    color: #eee;
+  }
+  
+  body.dark-mode table {
+    background-color: #1e1e1e;
+  }
+  
+  body.dark-mode tr:hover {
+    background-color: #2a2a2a;
+  }
+  
+  body.dark-mode a {
+    color: #80bfff;
+  }
+  
+  body.dark-mode :root {
+    --severity-critical: #ff7b7b;
+    --severity-critical-bg: #4a1e1e;
+    --severity-warning: #ffb347;
+    --severity-warning-bg: #3b2c10;
+    --severity-info: #80bfff;
+    --severity-info-bg: #1a2a3f;
+    --link-color: #80bfff;
+  }
+  
+  /* =========================================
+     === Responsive ===
+  ========================================= */
+  @media (max-width: 600px) {
+    .checkbox-list {
+      max-height: 150px;
+      width: 100%;
     }
+  
+    .refresh-controls {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  
+    table {
+      font-size: 12px;
+    }
+  
+    td, th {
+      padding: 4px;
+    }
+  }
+  
