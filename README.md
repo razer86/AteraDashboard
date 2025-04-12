@@ -19,7 +19,7 @@ A self-hosted web dashboard for viewing and filtering alerts and agent availabil
 
 ```bash
 git clone https://github.com/razer86/AteraDashboard.git
-cd atera-dashboard
+cd AteraDashboard
 ```
 
 ### 2. Add your Atera API key
