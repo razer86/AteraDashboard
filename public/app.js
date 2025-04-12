@@ -17,6 +17,17 @@ let seenAlertIds = new Set();
 
 
 // === Utility Functions ===
+
+// === Safe API Wrapper ===
+async function safeFetch(url, options = {}) {
+  const res = await fetch(url, options);
+  if (res.status === 429) {
+    console.warn(`Rate limit hit for ${url}`);
+    throw new Error('Rate limited');
+  }
+  return res;
+}
+
 function getSelectedCustomerIds() {
   return JSON.parse(localStorage.getItem('selectedCustomers') || '[]');
 }
@@ -76,12 +87,7 @@ function processBranchQueue() {
 
 async function getCustomerBranch(customerId) {
   if (customerBranchCache[customerId]) return customerBranchCache[customerId];
-  const res = await fetch(`/api/customers/${customerId}/branch`);
-  if (res.status === 429) {
-    const err = new Error('Rate limited');
-    err.status = 429;
-    throw err;
-  }
+  const res = await safeFetch(`/api/customers/${customerId}/branch`);
   const data = await res.json();
   const branch = data.branch || null;
   customerBranchCache[customerId] = branch;
@@ -290,7 +296,7 @@ function renderAlerts(alerts) {
 
 async function fetchAlerts() {
   try {
-    const res = await fetch('/api/alerts');
+    const res = await safeFetch('/api/alerts');
     if (!res.ok) throw new Error(`Server responded with ${res.status}`);
     const data = await res.json();
     renderAlerts(data.items);
@@ -307,7 +313,7 @@ async function fetchAlerts() {
 
 async function populateCustomerCheckboxes(force = false) {
   try {
-    const res = await fetch('/api/customers');
+    const res = await safeFetch('/api/customers');
     if (!res.ok) throw new Error(`Server responded with ${res.status}`);
     const data = await res.json();
 
