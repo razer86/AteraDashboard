@@ -1,3 +1,4 @@
+// Load required Node.js modules
 import express from 'express';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
@@ -20,10 +21,11 @@ try {
   console.warn('Could not load version info from package.json:', err.message);
 }
 
+// Set app type and port
 const app = express();
 const PORT = 3001;
 
-// Check for Atera API
+// Check for Atera API key
 if (!process.env.ATERA_API_KEY) {
   console.error('[!] ATERA_API_KEY is missing from .env file.');
   console.error('    Please create a .env file with your API key:');
@@ -39,7 +41,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
-// === Alerts API ===
+// Alerts API
 app.get('/api/alerts', async (req, res) => {
   try {
     const response = await fetch('https://app.atera.com/api/v3/alerts', {
@@ -56,7 +58,7 @@ app.get('/api/alerts', async (req, res) => {
   }
 });
 
-// === Customers API (with pagination) ===
+// Customers API (with pagination)
 app.get('/api/customers', async (req, res) => {
   const allCustomers = [];
   let page = 1;
@@ -88,7 +90,7 @@ app.get('/api/customers', async (req, res) => {
   }
 });
 
-// === Get Customer Branch custom field value
+// Get Customer Branch custom field value
 app.get('/api/customers/:id/branch', async (req, res) => {
   const { id } = req.params;
   const fieldName = 'Branch'; // Or make this dynamic later
@@ -131,7 +133,7 @@ app.get('/api/version', (req, res) => {
 });
 
 
-// === Launch Server ===
+// Launch Server
 app.listen(PORT, () => {
   console.log(`✅ Dashboard running at http://localhost:${PORT}`);
 });

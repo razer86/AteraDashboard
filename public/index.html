@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <link rel="stylesheet" href="style.css">
     <title>Atera Monitor</title>
 
-</head>
-<body>
-      <!-- To have the panel open on load, add 'open' key
-      <details id="customerPanel" open -->
-        <details id="customerPanel" style="margin-bottom: 16px; border: 1px solid #ccc; padding: 12px;">
-            <summary class="panel-summary">
-                <span class="arrow"></span>
-                <span id="customerStats">Customers: Loading...</span>
-                <span class="refresh-controls">
-                  <label for="refreshRate">Refresh:</label>
-                  <select id="refreshRate">
-                    <option value="30000">30 seconds</option>
-                    <option value="60000" selected>1 minute</option>
-                    <option value="300000">5 minutes</option>
-                  </select>
-                  <!-- <span id="refreshCountdown">Refreshing in: --</span> -->
-                </span>
-              </summary>
-              
-
-        <div class="details-content">
-          <label style="margin-left: 10px;" title="Disabled by default to reduce API load. Enabling this may trigger many Atera API requests.">
-            <input type="checkbox" id="toggleBranchLookup">
-            Enable Branch Lookups
-          </label>
-          
-          
+  </head>
+  <body>
+        <!-- To have the panel open on load, add 'open' key
+        <details id="customerPanel" open -->
+          <details id="customerPanel" style="margin-bottom: 16px; border: 1px solid #ccc; padding: 12px;">                          <!-- Create collapsible panel for customer selector -->
+              <summary class="panel-summary">
+                  <span class="arrow"></span>
+                  <span id="customerStats">Customers: Loading...</span>                                                               <!-- Set the default 'Loading' text until updated -->
+                  <span class="refresh-controls">
+                    <label for="refreshRate">Refresh:</label>                                                                         <!-- Add the Refresh rate selector --> 
+                    <select id="refreshRate">
+                      <option value="30000">30 seconds</option>
+                      <option value="60000" selected>1 minute</option>                                                                <!-- Set the default selection to 1 min -->
+                      <option value="300000">5 minutes</option>
+                    </select>
+                  </span>
+                </summary>
+                
+          <!-- Add the Branch Lookup toggle (will most likely remove this and standardize customer names in Atera) -->
+          <div class="details-content">
+            <label style="margin-left: 10px;" title="Disabled by default to reduce API load. Enabling this may trigger many Atera API requests.">
+              <input type="checkbox" id="toggleBranchLookup">
+              Enable Branch Lookups
+            </label>
+            
+            <!-- Add the customer selection buttons -->
             <div style="margin: 8px 0;">
-            <button type="button" onclick="selectAllCustomers()">Select All</button>
-            <button type="button" onclick="deselectAllCustomers()">Deselect All</button>
-            <button type="button" onclick="selectFilteredCustomers()">Select Filtered</button>
-
+              <button type="button" onclick="selectAllCustomers()">Select All</button>
+              <button type="button" onclick="deselectAllCustomers()">Deselect All</button>
+              <button type="button" onclick="selectFilteredCustomers()">Select Filtered</button>
             </div>
 
+            <!-- Add the customer search box -->
             <input type="text" id="customerSearch" placeholder="Search customers...">
-
+            
+            <!-- Add the customer checkbox list -->
             <div id="customerCheckboxes" class="checkbox-list"></div>
 
-        </div>
+          </div>
         </details>
 
-     
       
-    
-  <div class="section">
-    <div id="alertsDiv"></div>
-  </div>
+        
+    <!-- Alerts section -->
+    <div class="section">
+      <div id="alertsDiv"></div>
+    </div>
 
-  <script src="app.js"></script>
+    <!-- Load the app.js script to generate the onscreen data -->
+    <script src="app.js"></script>
+    
+    <!-- Floating refreshing countdown timer-->
+    <div id="refreshCountdownBox">🔄 Refreshing in: --</div>
   
-  <!-- <small id="versionTag"></small> -->
-  <div id="refreshCountdownBox">🔄 Refreshing in: --</div>
- 
-</body>
+  </body>
 </html>
